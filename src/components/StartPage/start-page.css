@@ -4,7 +4,6 @@
   padding: 0 2rem;
   display: grid;
   background-image: linear-gradient(to right, #fdc830, #f37335);
-  place-items: center;
 }
 .startPage {
   place-self: center;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import Header from "./header/Header";
 import "./game-page.css";
 
 export default function GamePage() {
@@ -28,6 +28,11 @@ export default function GamePage() {
     const { value } = e.target;
     setState((prev) => ({ ...prev, text: value }));
   }
+  function countWords() {
+    const arr = state.text.trim().split(" ");
+    const words = arr.filter((word) => word).length;
+    setState((prev) => ({ ...prev, wordCount: words }));
+  }
   useEffect(() => {
     if (state.isActive && state.timer > 0) {
       setTimeout(
@@ -35,20 +40,25 @@ export default function GamePage() {
         1000
       );
     } else if (state.timer === 0) {
+      countWords();
       endGame();
     }
   }, [state.isActive, state.timer]);
   return (
-    <div>
-      <h1>How fast do you type?</h1>
+    <div className="gamePage">
+      <Header />
+      <h1 className="gamePage__heading">Start the Challenge!</h1>
       <textarea
+        className="gamePage__text"
         ref={textRef}
         onChange={handleChange}
         value={state.text}
         disabled={!state.isActive}
       />
-      <h4>Time remaining: {state.timer}</h4>
-      <button onClick={startGame}>Start</button>
+      <h4 className="gamePage__timer">Time remaining: {state.timer}</h4>
+      <button className="start" onClick={startGame} disabled={state.isActive}>
+        Start
+      </button>
       <h1>Word count: {state.wordCount}</h1>
     </div>
   );

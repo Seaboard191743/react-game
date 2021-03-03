@@ -1,27 +1,40 @@
 .gamePage {
   width: 100%;
-  height: 100vh;
-  padding: 1rem;
+  place-self: start center;
   text-align: center;
+  color: rgba(250, 250, 250, 1);
 }
 .gamePage__heading {
-  font-size: clamp(2rem, 4rem, 6vw);
+  font-size: clamp(2rem, 3rem, 6vw);
+  margin-bottom: 1rem;
 }
 .gamePage__text {
   width: min(600px, 100%);
   height: 200px;
-  background: #00b800;
+  border: none;
+  background: rgba(255, 213, 79, 1);
   margin: 0 auto;
+  margin-bottom: 1rem;
   padding: 1rem;
 }
 .gamePage__text:disabled {
-  background-color: #a5a2a2;
+  background-color: rgba(224, 222, 222, 1);
 }
-.saveResult {
-  display: block;
-  margin: 0 auto;
+.gamePage__timer {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+.start {
+  width: 250px;
+  height: 60px;
+  margin-bottom: 1rem;
+  transition: 0.25s;
   border: none;
-  background: #00b800;
-  padding: 1rem 3rem;
-  text-transform: uppercase;
+  background: rgba(218, 68, 83, 1);
+  color: rgba(250, 250, 250, 1);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.start:hover {
+  opacity: 0.7;
 }
