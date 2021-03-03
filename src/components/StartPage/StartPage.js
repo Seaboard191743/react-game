@@ -18,7 +18,7 @@ export default function StartPage() {
           Type in as many words as possible before the timer runs out!
         </p>
       </div>
-      <h2 className="startStats__result">Personal best: {value}</h2>
+      <h2 className="startStats__result">Your latest Result: {value}</h2>
       <Link to="gamepage">
         <button className="startButton">Open</button>
       </Link>

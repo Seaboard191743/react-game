@@ -12,7 +12,7 @@ export default function SaveResult({ active, handleResult }) {
         handleResult(), setTimeout(() => push("/"), 2000);
       }}
     >
-      Save
+      Save Res
     </button>
   );
 }
