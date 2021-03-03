@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import "./start-page.css";
 
 export default function StartPage() {
   const [value, setValue] = useState(0);
   useEffect(() => {
-    const dataFromLS = JSON.parse(localStorage.getItem("pb"));
-    setValue(Math.max(...dataFromLS));
+    setValue(localStorage.getItem("pb") || 0);
   }, []);
   return (
     <div className="startPage">
@@ -18,7 +16,7 @@ export default function StartPage() {
           Type in as many words as possible before the timer runs out!
         </p>
       </div>
-      <h2 className="startStats__result">Your latest Result: {value}</h2>
+      <h2 className="startStats__result">Your Latest Result: {value}</h2>
       <Link to="gamepage">
         <button className="startButton">Open</button>
       </Link>

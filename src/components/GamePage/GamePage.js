@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import Header from "./header/Header";
+import useGame from "../../useGame/useGame";
 import "./game-page.css";
 
 export default function GamePage() {
+  const { setValue } = useGame();
   const textRef = useRef(null);
   const [level, setLevel] = useState({
     text: "Easy",
@@ -14,7 +16,6 @@ export default function GamePage() {
     isActive: false,
     text: "",
     wordCount: 0,
-    bestResult: [0],
   });
   function chooseLevel() {
     if (level.index < 2) {
@@ -56,9 +57,8 @@ export default function GamePage() {
     setState((prev) => ({
       ...prev,
       isActive: false,
-      bestResult: [...prev.bestResult, prev.wordCount],
     }));
-    localStorage.setItem("pb", JSON.stringify(state.bestResult));
+    localStorage.setItem("pb", state.wordCount);
   }
 
   function endGame() {
