@@ -3,26 +3,69 @@ import Header from "./header/Header";
 import "./game-page.css";
 
 export default function GamePage() {
-  const STARTING_TIME = 5;
   const textRef = useRef(null);
+  const [level, setLevel] = useState({
+    text: "Easy",
+    STARTING_TIME: 60,
+    index: 0,
+  });
   const [state, setState] = useState({
-    timer: STARTING_TIME,
+    timer: level.STARTING_TIME,
     isActive: false,
     text: "",
     wordCount: 0,
+    bestResult: [0],
   });
+  function chooseLevel() {
+    if (level.index < 2) {
+      setLevel((prev) => ({
+        ...prev,
+        index: prev.index + 1,
+        STARTING_TIME: prev.STARTING_TIME - 20,
+      }));
+      setState((prev) => ({ ...prev, timer: prev.timer - 20 }));
+      if (level.index < 1) {
+        setLevel((prev) => ({
+          ...prev,
+          text: "Hard",
+        }));
+      }
+      if (level.index >= 1) {
+        setLevel((prev) => ({
+          ...prev,
+          text: "World Class",
+        }));
+      }
+    } else {
+      setLevel({ text: "Easy", STARTING_TIME: 60, index: 0 });
+      setState((prev) => ({ ...prev, timer: 60 }));
+    }
+  }
+
   function startGame() {
     setState((prev) => ({
       ...prev,
       isActive: true,
-      timer: STARTING_TIME,
+      timer: level.STARTING_TIME,
       text: "",
     }));
     textRef.current.focus();
     textRef.current.disabled = false;
   }
+  function saveResult() {
+    setState((prev) => ({
+      ...prev,
+      isActive: false,
+      bestResult: [...prev.bestResult, prev.wordCount],
+    }));
+    localStorage.setItem("pb", JSON.stringify(state.bestResult));
+  }
+
   function endGame() {
-    setState((prev) => ({ ...prev, isActive: false }));
+    setState((prev) => ({
+      ...prev,
+      isActive: false,
+    }));
   }
   function handleChange(e) {
     const { value } = e.target;
@@ -46,7 +89,13 @@ export default function GamePage() {
   }, [state.isActive, state.timer]);
   return (
     <div className="gamePage">
-      <Header />
+      <Header
+        {...level}
+        active={state.isActive}
+        handleClick={chooseLevel}
+        handleEnd={endGame}
+        handleResult={saveResult}
+      />
       <h1 className="gamePage__heading">Start the Challenge!</h1>
       <textarea
         className="gamePage__text"

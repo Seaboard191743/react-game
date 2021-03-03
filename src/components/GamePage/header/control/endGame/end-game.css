@@ -1,0 +1,16 @@
+.endGame {
+  width: 80px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(250, 27, 27, 1);
+  border: 1px solid #ff3d00;
+  cursor: pointer;
+  color: rgba(250, 250, 250, 1);
+  transition: background 0.3s;
+  margin-left: 0.5rem;
+}
+.endGame:active {
+  background: rgba(221, 44, 0, 1);
+}

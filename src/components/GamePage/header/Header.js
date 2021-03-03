@@ -1,13 +1,13 @@
 import React from "react";
 import Level from "./level";
-import ControlPanel from "./control-panel";
+import Control from "./control/Control";
 import "./header.css";
 
-export default function Header() {
+export default function Header(props) {
   return (
     <header className="header">
-      <Level />
-      <ControlPanel />
+      <Level {...props} />
+      <Control {...props} />
     </header>
   );
 }

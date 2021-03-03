@@ -1,11 +1,12 @@
-import React from "react";
-import LevelList from "./level-list";
+import React, { useState } from "react";
+import "./level.css";
 
-export default function Level() {
+export default function Level({ text, active, handleClick }) {
   return (
-    <div>
-      <p>Level</p>
-      <LevelList />
+    <div className="levelContainer">
+      <button onClick={handleClick} className="level" disabled={active}>
+        {text}
+      </button>
     </div>
   );
 }
